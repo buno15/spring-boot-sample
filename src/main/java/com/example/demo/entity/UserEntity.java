@@ -1,9 +1,6 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class UserEntity {
@@ -11,8 +8,20 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false, unique = true)
     private String email;
+
+    public UserEntity() {
+    }  // JPA には引数なしのコンストラクタが必要
+
+    public UserEntity(String name, String email) {
+        this.name = name;
+        this.email = email;
+    }
 
     // Getters and setters
     public Long getId() {
